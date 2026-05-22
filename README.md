@@ -11,6 +11,44 @@ Stage 1 v1 (CLI) and v2 (local web UI) shipped 2026-05-21 on
 for the ship log, and [docs/superpowers/specs/](docs/superpowers/specs/)
 for the design history.
 
+## How it works
+
+A small pure-library core (`tandc.core`) does the analysis pipeline. Two front-ends share it: a `typer` CLI and a FastAPI local web UI. The web UI exposes a single `POST /analyze` JSON endpoint that a future Stage 2 Chrome extension will also call — same backend, different UX layer.
+
+```
+┌─ CLI ──────────────────┐      ┌─ Web UI ──────────────────────────────┐
+│ tandc analyze <URL|->  │      │ browser tab @ 127.0.0.1:8765          │
+│ tandc analyze file.pdf │      │   form: URL / paste / file (HTML/PDF) │
+└──────────┬─────────────┘      └─────────────────┬─────────────────────┘
+           │                                      │ fetch()
+           │                                      ▼ POST /analyze
+           │                    ┌─────────────────────────────────────┐
+           │                    │  FastAPI  (tandc.web.app)           │
+           │                    │  POST /analyze  (api.py)            │
+           │                    │  GET  /        (static HTML/JS/CSS) │
+           │                    │  GET  /docs    (OpenAPI auto)       │
+           │                    └─────────────────┬───────────────────┘
+           ▼                                      ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│              tandc.core.analyze()  /  analyze_prepared()               │
+│                                                                        │
+│   loader  →  cache  →  Claude (Sonnet/Opus)  →  schema  →  render      │
+│   (URL+httpx,  (SHA-256     (system-prompt    (Pydantic   (rich for    │
+│    PDF,        content-      caching,          v2,         CLI;        │
+│    paste)      hash file     2-retry on        Core 4 +    Markdown +  │
+│                cache at      malformed)        Flag 4)     JSON for    │
+│                ~/.tandc/)                                  files)      │
+└────────────────────────────────────────────────────────────────────────┘
+                                  │
+                                  ▼
+              ./reports/<host-slug>-<date>/{input.txt,
+                                            fetch_meta.json,
+                                            report.json,
+                                            report.md}
+```
+
+Reports follow a fixed taxonomy: **4 Core findings** (personal data, PII protection, continuity, liability/dispute) each with severity + verbatim evidence quotes, plus **4 Flags** (content licensing, account access, payment/subscription, jurisdictional) with presence + note.
+
 ## Setup
 
 You need: git, Python 3.11+, a virtual-env manager (conda or venv — both shown below), and an Anthropic API key from <https://console.anthropic.com/settings/keys>.
@@ -42,6 +80,8 @@ export ANTHROPIC_API_KEY=sk-ant-...   # get one at https://console.anthropic.com
 # 5. Verify
 tandc --help
 ```
+
+tandc reads `ANTHROPIC_API_KEY` from the process environment — it does **not** load `.env` files automatically. If you keep secrets in `~/.env` or a per-project `.env`, source it before invoking (e.g. add `set -a; source ~/.env; set +a` to your shell rc, or to a wrapper script).
 
 ## Usage — CLI (v1)
 
