@@ -8,6 +8,10 @@
 local web UI (`tandc.web`). Pydantic v2 owns data shape. Anthropic
 Claude is the analysis engine.
 
+**Repo**: <https://github.com/nborwankar/tandc> — public, MIT
+licensed, GitHub Actions configured (manual-only — see "CI" section
+below). 12 topics for discovery.
+
 **Layout**: `src/tandc/` package, `tests/`, `docs/superpowers/{specs,plans}/`.
 Runtime artefacts go to `./reports/` and `~/.tandc/cache/` (both
 gitignored).
