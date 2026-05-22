@@ -1,5 +1,14 @@
 # DONE — tandc
 
+> **Note on commit SHAs:** Sections below refer to commits like `e2cd027`,
+> `99c7710`, `3c79540`, `eb7f6c2`, `e2bd076`, etc. These are SHAs from the
+> **pre-rebuild local repo**, which was deleted on 2026-05-21 after an
+> API-key leak was found in committed test-run logs (see the rebuild section
+> dated 2026-05-21). They are preserved here as a development narrative but
+> **will not be found by `git log` in the current public repo** — the
+> rebuilt repo has a single initial commit (`c27f1ed`) consolidating both
+> v1 and v2 code.
+
 ## 2026-05-20 — Stage 1 v1 complete
 
 Implemented the paste-and-analyze CLI end-to-end:
@@ -153,6 +162,57 @@ verifies the `tandc` binary is installed in the env, then `exec`s
 README.md updated to document v1 CLI usage AND v2 web UI usage,
 including the launcher script as the recommended entry point and
 three curl examples for hitting the API directly.
+
+## 2026-05-21 — incident: API-key leak in test-run logs, repo rebuild, public push
+
+**What happened.** During pre-publish audit, the real `ANTHROPIC_API_KEY`
+was found in 4 committed files under `docs/test_runs/` (≥10 occurrences
+total) and in the corresponding commits. Root cause: `tests/conftest.py`
+had a session-scope `_captured_real_key` fixture that returned the raw
+key string. `pytest -v` includes fixture values in its verbose report,
+and the standing test-log rule (`tee docs/test_runs/...`) committed
+those reports to git. No public push had occurred yet.
+
+**Remediation.** Caught before any `git push` to a remote.
+1. Rotated the leaked key in Anthropic Console (revoked + created new).
+2. Updated `~/.env` and `~/.zshrc` with the new key.
+3. Deleted the entire pre-rebuild `.git` tree (incl. reflog) so leaked
+   commits could not be recovered, even via reflog.
+4. Deleted all contents of `docs/test_runs/` (preserved the dir via a
+   `.gitkeep`).
+5. Audited `.gitignore` for completeness; added `docs/test_runs/*` plus
+   `.venv/`, `*.log`, `.coverage`, etc. as defensive belt-and-suspenders.
+6. `git init` + single initial commit `c27f1ed` consolidating v1 + v2.
+7. Full sanity sweep (9 checks): zero matches for the leaked key, any
+   `sk-ant-` shape, AWS/OpenAI/GitHub/Slack/GCP key shapes, or generic
+   `key=value` high-entropy patterns.
+8. `gh repo create nborwankar/tandc --public --push`. Live at
+   <https://github.com/nborwankar/tandc>.
+
+**Prevention layers now in place (CLAUDE.md documents in detail):**
+- **Layer A** — `tests/conftest.py` wraps the key in a `_RealKey` object
+  whose `__repr__` returns `"<REDACTED>"`. Consumers call `.value`.
+  Pytest `-v` cannot surface the raw key any longer.
+- **Layer B** — `.gitignore` excludes `docs/test_runs/*` by default.
+  Test-run raw output is local-only. The `docs/TEST_LOG.md` summary
+  (counts/durations only) stays tracked.
+- **Layer C considered + dropped** — a `gitleaks` pre-commit hook was
+  installed and tested; its default ruleset didn't reliably catch
+  Anthropic-format keys in our verification. An unreliable hook gives
+  a false sense of security, so it was removed.
+
+**Global lesson persisted.** A new section was added to
+`~/.claude/CLAUDE.md` ("⚠️ CRITICAL: NEVER Let Secrets Leak Into Test
+Logs") documenting the failure mode and prevention layers so this
+class of leak is harder to repeat in any future Python project.
+
+**Post-rebuild polish** (commits 2359e25 through c626bbc on the new
+repo): README fixes (clone step, working example URLs, API-key
+console link, prerequisites, user vs dev install split, venv
+alternative, ship-date fix, linkified paths, `.env` note, "How it
+works" section), MIT LICENSE + `pyproject.toml` license metadata,
+GitHub Actions workflow (manual-only — `workflow_dispatch`), 12
+GitHub topics for discovery.
 
 ## 2026-05-20 — project scaffolded
 

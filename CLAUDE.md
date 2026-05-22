@@ -66,12 +66,17 @@ Public-repo Actions minutes are free; cost concern is zero. The reason it's manu
 **Roadmap**: see `PLAN.md`.
 
 **Shipped**:
-- Stage 1 v1 (CLI) — 2026-05-20, merged to `main` at `e2cd027`.
-- Stage 1 v2 (local web UI) — 2026-05-21, merged to `main` at
-  `99c7710`. `tandc serve` → `http://127.0.0.1:8765`. Single
-  `POST /analyze` JSON endpoint serves both the web form and the
-  future Stage 2 Chrome extension. Recommended launcher:
-  `./scripts/serve.sh` (handles conda PATH + API-key precheck).
+- Stage 1 v1 (CLI) — built 2026-05-20.
+- Stage 1 v2 (local web UI) — built 2026-05-21. `tandc serve` →
+  `http://127.0.0.1:8765`. Single `POST /analyze` JSON endpoint
+  serves both the web form and the future Stage 2 Chrome extension.
+  Recommended launcher: `./scripts/serve.sh` (handles conda PATH +
+  API-key precheck).
+- The current public repo was rebuilt from a clean working tree on
+  2026-05-21 (incident — see secrets-in-logs section above). Both
+  v1 and v2 code are consolidated into the initial commit
+  `c27f1ed`; the pre-rebuild repo's per-task SHAs (referenced in
+  `DONE.md` history) are no longer findable via `git log`.
 
 **Active**:
 - Stage 2 brainstorm — fresh Chrome extension vs extend Claude for

@@ -123,15 +123,22 @@ place to keep token cost manageable.
 
 ## Current Status
 
-**Stage 1 v1 (CLI) — shipped 2026-05-20.** Merged to `main` at
-commit `e2cd027`. 88 unit tests + 6/6 live smoke. See `DONE.md`.
+**Stage 1 v1 (CLI) — shipped 2026-05-20.** 88 unit tests + 6/6 live
+smoke. See `DONE.md`.
 
-**Stage 1 v2 (local web UI) — shipped 2026-05-21 at `99c7710`.**
-126 unit tests + 6/6 live regression smoke + live e2e (3 input
-modes + 4 error mappings + cache hit) all green. Recommended
-launcher: `./scripts/serve.sh` (conda PATH + API-key precheck).
+**Stage 1 v2 (local web UI) — shipped 2026-05-21.** 126 unit tests
++ 6/6 live regression smoke + live e2e (3 input modes + 4 error
+mappings + cache hit) all green. Recommended launcher:
+`./scripts/serve.sh` (conda PATH + API-key precheck).
 Spec: `docs/superpowers/specs/2026-05-21-stage1-v2-web-ui-design.md`.
 Plan: `docs/superpowers/plans/2026-05-21-stage1-v2-web-ui.md`.
+
+Public repo at <https://github.com/nborwankar/tandc>. Both v1 and
+v2 are consolidated into the initial commit `c27f1ed` because the
+pre-rebuild repo was deleted on 2026-05-21 (see `DONE.md` for the
+rebuild rationale). The per-task SHAs that `DONE.md` references in
+its history sections are from that pre-rebuild repo and are no
+longer findable via `git log`.
 
 **Stage 2 (Chrome extension) — brainstorm pending.** Decision: fresh
 extension calling `localhost:8765/analyze` vs extending Claude for
