@@ -22,6 +22,10 @@ docs/test_runs/*
 .env.*
 !.env.example
 
+# Virtual environments (if installer chose the venv path from README)
+.venv/
+venv/
+
 # OS / editor
 .DS_Store
 .idea/

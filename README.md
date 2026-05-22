@@ -6,28 +6,40 @@ unilateral changes, arbitration / class-action waivers, and more.
 
 ## Status
 
-Stage 1 v1 (CLI) and v2 (local web UI) shipped 2026-05-2x on
-`main`. See `PLAN.md` for the roadmap, `DONE.md` for the ship log,
-and `docs/superpowers/specs/` for the design history.
+Stage 1 v1 (CLI) and v2 (local web UI) shipped 2026-05-21 on
+`main`. See [PLAN.md](PLAN.md) for the roadmap, [DONE.md](DONE.md)
+for the ship log, and [docs/superpowers/specs/](docs/superpowers/specs/)
+for the design history.
 
 ## Setup
 
-You need: git, Python 3.11+, [conda](https://docs.conda.io/projects/miniconda/en/latest/) (or any other virtual-env manager), and an Anthropic API key from <https://console.anthropic.com/settings/keys>.
+You need: git, Python 3.11+, a virtual-env manager (conda or venv — both shown below), and an Anthropic API key from <https://console.anthropic.com/settings/keys>.
 
 ```bash
-# Clone
+# 1. Clone
 git clone https://github.com/nborwankar/tandc.git
 cd tandc
 
-# Create environment + install
+# 2. Create a virtual environment — pick ONE of the two:
+
+# (a) conda (recommended if you have it)
 conda create -n tandc python=3.11 -y
 conda activate tandc
+
+# (b) venv (stdlib, no extra install needed)
+python3.11 -m venv .venv
+source .venv/bin/activate           # Windows: .venv\Scripts\activate
+
+# 3. Install the package
+#     Users (just want to run the tool):
+pip install -e .
+#     Contributors (also need pytest, ruff, etc.):
 pip install -e ".[dev]"
 
-# Set your API key (also add this line to ~/.zshrc or your shell rc file)
+# 4. Set your API key (and add this line to ~/.zshrc or your shell rc file)
 export ANTHROPIC_API_KEY=sk-ant-...   # get one at https://console.anthropic.com/settings/keys
 
-# Verify
+# 5. Verify
 tandc --help
 ```
 
