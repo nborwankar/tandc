@@ -1,16 +1,13 @@
 name: tests
 
-# Runs the unit test suite on every push to main and every pull request.
-# Only the fast, mocked-Claude tests run here (-m "not slow"). The 6-vendor
-# live smoke suite (-m slow) costs ~$0.06 per run and needs a real
-# ANTHROPIC_API_KEY, so it stays local — see DONE.md for how to run it.
+# Runs the 126 mocked-Claude unit tests. Manual-only trigger:
+# click "Run workflow" in the Actions tab when you want a fresh run.
+#
+# The slow live-Claude smoke suite (-m slow) costs ~$0.06 per run and
+# needs a real ANTHROPIC_API_KEY — that stays local-only, never CI.
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-  workflow_dispatch: {}  # allow manual trigger from the Actions tab
+  workflow_dispatch: {}
 
 permissions:
   contents: read
