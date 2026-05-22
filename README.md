@@ -42,6 +42,14 @@ tandc cache list
 
 Reports are written under `./reports/<host-slug>-<date>/`.
 
+Three more T&C URLs known to fetch and analyze cleanly, if you want to try the tool against different services:
+
+- Dropbox — <https://www.dropbox.com/terms>
+- Discord — <https://discord.com/terms>
+- Wikimedia Foundation — <https://foundation.wikimedia.org/wiki/Terms_of_Use/en>
+
+(Some sites — notably OpenAI's policy pages — return HTTP 403 to automated fetches and won't work directly; paste the text via stdin instead.)
+
 ## Usage — local web UI (v2)
 
 The recommended way to start the server is the launcher script — it
