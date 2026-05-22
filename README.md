@@ -12,19 +12,31 @@ and `docs/superpowers/specs/` for the design history.
 
 ## Setup
 
+You need: git, Python 3.11+, [conda](https://docs.conda.io/projects/miniconda/en/latest/) (or any other virtual-env manager), and an Anthropic API key from <https://console.anthropic.com/settings/keys>.
+
 ```bash
+# Clone
+git clone https://github.com/nborwankar/tandc.git
+cd tandc
+
+# Create environment + install
 conda create -n tandc python=3.11 -y
 conda activate tandc
 pip install -e ".[dev]"
-export ANTHROPIC_API_KEY=sk-...   # add to ~/.zshrc / ~/.zprofile
+
+# Set your API key (also add this line to ~/.zshrc or your shell rc file)
+export ANTHROPIC_API_KEY=sk-ant-...   # get one at https://console.anthropic.com/settings/keys
+
+# Verify
+tandc --help
 ```
 
 ## Usage — CLI (v1)
 
 ```bash
-tandc analyze https://openai.com/policies/terms-of-use/
+tandc analyze https://www.anthropic.com/legal/consumer-terms
 cat policy.txt | tandc analyze -
-tandc analyze https://example.com/terms --opus
+tandc analyze https://www.anthropic.com/legal/commercial-terms --opus
 tandc cache list
 ```
 
