@@ -26,6 +26,43 @@ A third layer (`gitleaks` pre-commit hook) was evaluated and dropped — the def
 
 If you ever modify the conftest fixture or the `.gitignore` `test_runs/` rule: re-read the global rule at `~/.claude/CLAUDE.md` → "⚠️ CRITICAL: NEVER Let Secrets Leak Into Test Logs".
 
+## CI (GitHub Actions)
+
+`.github/workflows/test.yml` runs the 126 mocked-Claude unit tests (`pytest -m "not slow"`) on Ubuntu / Python 3.11. The `-m slow` 6-vendor live-Claude smoke suite never runs in CI (needs a real API key + costs ~$0.06 per run) — it stays local-only.
+
+**Currently the workflow is manual-only** — its trigger block is just:
+
+```yaml
+on:
+  workflow_dispatch: {}
+```
+
+That means pushes and PRs do NOT auto-run tests. To re-enable auto-triggers, replace the `on:` block with one or both of these:
+
+```yaml
+# Auto-run on every push to main:
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+# Or auto-run on PRs to main (best when others may contribute):
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch: {}
+
+# Or both:
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch: {}
+```
+
+Public-repo Actions minutes are free; cost concern is zero. The reason it's manual-only is solo-dev ceremony reduction — the operator (you) runs `pytest -m "not slow"` locally before each push, so auto-CI is redundant signal.
+
 **Roadmap**: see `PLAN.md`.
 
 **Shipped**:
