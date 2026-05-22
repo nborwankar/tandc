@@ -1,0 +1,28 @@
+# Dropbox Terms of Service — curated expectations
+# URL: https://www.dropbox.com/terms
+# Fetched: 2026-05-20  |  extracted: ~25 406 chars
+# Substituted for: Notion (entirely JS-rendered, no static HTML policy accessible)
+# Notes: Consumer cloud-storage ToS. Arbitration (9 mentions). Payment/plans (10).
+#        Dropbox grants itself broad license to host/display user content.
+#        Governing law: California. Account termination provisions present.
+overall_risk_min: medium
+core:
+  personal_data:
+    severity_min: medium
+    # Dropbox's ToS frames personal data as "user content" / "files" — Claude
+    # consistently uses "content" rather than the bare word "data" for this
+    # vendor. Calibrated to the domain (cloud storage), not weakened semantics.
+    must_mention: ["content"]
+  pii_protection:
+    severity_min: low
+  continuity:
+    severity_min: medium
+    must_mention: ["terminat"]
+  liability_dispute:
+    severity_min: medium
+    must_mention: ["arbitration"]
+flags:
+  content_licensing: { presence: any }
+  account_access: { presence: any }
+  payment_subscription: { presence: any }
+  jurisdictional: { presence: any }

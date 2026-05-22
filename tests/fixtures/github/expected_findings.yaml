@@ -1,0 +1,24 @@
+# GitHub Terms of Service — curated expectations
+# URL: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+# Fetched: 2026-05-20  |  extracted: ~43 272 chars
+# Notes: Full consumer ToS. Heavy content-licensing section (14 mentions) — GitHub
+#        gets broad license to host/display user content. Payment/paid plans (17).
+#        No arbitration clause in this ToS; disputes go to federal court (CA).
+#        Detailed account-suspension/termination section.
+overall_risk_min: medium
+core:
+  personal_data:
+    severity_min: medium
+    must_mention: ["data"]
+  pii_protection:
+    severity_min: low
+  continuity:
+    severity_min: medium
+    must_mention: ["terminat"]
+  liability_dispute:
+    severity_min: medium
+flags:
+  content_licensing: { presence: any }
+  account_access: { presence: any }
+  payment_subscription: { presence: any }
+  jurisdictional: { presence: any }

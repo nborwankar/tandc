@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>tandc — T&amp;C risk analyzer</title>
+  <link rel="stylesheet" href="/static/tandc.css">
+</head>
+<body>
+  <header>
+    <h1>tandc</h1>
+    <p class="tagline">Terms &amp; Conditions risk analyzer</p>
+  </header>
+
+  <main>
+    <form id="analyze-form">
+      <fieldset>
+        <legend>Input</legend>
+
+        <div class="mode-row">
+          <label><input type="radio" name="mode" value="url" checked> URL</label>
+          <label><input type="radio" name="mode" value="paste"> Paste</label>
+          <label><input type="radio" name="mode" value="file"> File</label>
+        </div>
+
+        <div class="mode-panel" data-panel="url">
+          <input type="url" id="input-url" placeholder="https://example.com/terms">
+        </div>
+
+        <div class="mode-panel" data-panel="paste" hidden>
+          <textarea id="input-paste" rows="10"
+                    placeholder="Paste policy text here…"></textarea>
+          <input type="url" id="input-source-url"
+                 placeholder="(optional) source URL for metadata">
+        </div>
+
+        <div class="mode-panel" data-panel="file" hidden>
+          <input type="file" id="input-file"
+                 accept=".html,.htm,.txt,.pdf,text/html,text/plain,application/pdf">
+        </div>
+      </fieldset>
+
+      <fieldset class="options">
+        <label><input type="checkbox" id="use-cache" checked> use cache</label>
+        <label>Model:
+          <label><input type="radio" name="model" value="sonnet" checked> Sonnet</label>
+          <label><input type="radio" name="model" value="opus"> Opus</label>
+        </label>
+      </fieldset>
+
+      <button type="submit" id="submit-btn">Analyze</button>
+    </form>
+
+    <section id="status" aria-live="polite"></section>
+    <section id="result"></section>
+  </main>
+
+  <script src="/static/tandc.js"></script>
+</body>
+</html>

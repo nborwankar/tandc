@@ -1,0 +1,23 @@
+# OpenAI Terms of Use (ROW) — curated expectations
+# URL: https://openai.com/policies/row-terms-of-use/
+# Fetched: 2026-05-20  |  extracted: ~20 570 chars
+# Notes: Consumer ToS. Explicit arbitration (11 mentions), payment/subscription (7),
+#        content licensing grant (2), data/privacy references, Delaware governing law.
+overall_risk_min: medium
+core:
+  personal_data:
+    severity_min: medium
+    must_mention: ["data"]
+  pii_protection:
+    severity_min: low
+  continuity:
+    severity_min: medium
+    must_mention: ["terminat"]
+  liability_dispute:
+    severity_min: medium
+    must_mention: ["arbitration"]
+flags:
+  content_licensing: { presence: any }
+  account_access: { presence: any }
+  payment_subscription: { presence: any }
+  jurisdictional: { presence: any }

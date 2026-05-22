@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# tandc runtime artefacts
+reports/
+.tandc/
+
+# Test-run raw output — LOCAL ONLY (incident 2026-05-21: API key leaked here).
+# The directory is preserved via .gitkeep so the test-log tee target exists.
+# To share a specific run, copy it elsewhere or commit it deliberately with -f
+# AFTER manual review for secrets. Do NOT remove this rule.
+docs/test_runs/*
+!docs/test_runs/.gitkeep
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Misc tooling that may show up in this tree (defensive — not currently used)
+*.log
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.ipynb_checkpoints/
+
+# Python build artefacts
+build/
+dist/
+*.whl
+*.tar.gz
+
+# Local Claude Code per-project state (if a plugin creates one)
+.claude/

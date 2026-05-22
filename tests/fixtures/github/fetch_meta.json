@@ -1,0 +1,11 @@
+{
+  "source": "url",
+  "url": "https://docs.github.com/en/site-policy/github-terms/github-terms-of-service",
+  "fetched_at": "2026-05-20T19:07:22.130360Z",
+  "http_status": 200,
+  "content_type": "text/html; charset=utf-8",
+  "content_type_was_plain": false,
+  "extractor": "trafilatura",
+  "raw_bytes": 252832,
+  "extracted_chars": 43147
+}

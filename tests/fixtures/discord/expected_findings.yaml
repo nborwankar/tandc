@@ -1,0 +1,25 @@
+# Discord Terms of Service — curated expectations
+# URL: https://discord.com/terms
+# Fetched: 2026-05-20  |  extracted: ~59 290 chars
+# Notes: Full consumer ToS. Heavy arbitration (31 mentions) with class-action waiver.
+#        Broad content license grant to Discord (6 mentions). Payment/Nitro (16).
+#        Extensive jurisdictional section (24 mentions, California law, AAA arbitration).
+#        Personal data (3), detailed account suspension/termination provisions.
+overall_risk_min: medium
+core:
+  personal_data:
+    severity_min: medium
+    must_mention: ["data"]
+  pii_protection:
+    severity_min: low
+  continuity:
+    severity_min: medium
+    must_mention: ["terminat"]
+  liability_dispute:
+    severity_min: medium
+    must_mention: ["arbitration"]
+flags:
+  content_licensing: { presence: any }
+  account_access: { presence: any }
+  payment_subscription: { presence: any }
+  jurisdictional: { presence: any }

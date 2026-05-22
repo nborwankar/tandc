@@ -1,0 +1,11 @@
+{
+  "source": "url",
+  "url": "https://www.anthropic.com/legal/consumer-terms",
+  "fetched_at": "2026-05-20T19:06:03.946437Z",
+  "http_status": 200,
+  "content_type": "text/html; charset=utf-8",
+  "content_type_was_plain": false,
+  "extractor": "trafilatura",
+  "raw_bytes": 475435,
+  "extracted_chars": 28768
+}

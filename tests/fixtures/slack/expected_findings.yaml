@@ -1,0 +1,24 @@
+# Slack User Terms of Service — curated expectations
+# URL: https://slack.com/terms-of-service/user
+# Fetched: 2026-05-20  |  extracted: ~13 197 chars
+# Notes: B2B-adjacent User ToS (not the Customer/MSA terms). Users are Authorized
+#        Users on Customer-controlled workspaces. Customer data owned by Customer.
+#        No arbitration clause (B2B disputes go to court). Payment references are
+#        indirect (Customer pays, not individual users). Liability cap: $100/user.
+#        Governing law: California (exclusive jurisdiction).
+overall_risk_min: medium
+core:
+  personal_data:
+    severity_min: low
+  pii_protection:
+    severity_min: low
+  continuity:
+    severity_min: medium
+    must_mention: ["terminat"]
+  liability_dispute:
+    severity_min: medium
+flags:
+  content_licensing: { presence: any }
+  account_access: { presence: any }
+  payment_subscription: { presence: any }
+  jurisdictional: { presence: any }

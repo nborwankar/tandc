@@ -1,0 +1,25 @@
+# Anthropic Consumer Terms of Service — curated expectations
+# URL: https://www.anthropic.com/legal/consumer-terms
+# Fetched: 2026-05-20  |  extracted: ~28 890 chars
+# Notes: Consumer ToS for Claude.ai/Claude Pro. No standalone arbitration clause
+#        in this extract (may arbitrate via reference). Heavy payment/subscription
+#        section (24 mentions). Users retain input rights; outputs assigned to user.
+#        Governing law: California. No explicit content-licensing grant to Anthropic.
+overall_risk_min: medium
+core:
+  personal_data:
+    severity_min: medium
+    # No must_mention — Claude correctly summarises this risk using domain words
+    # ("conversations", "inputs and outputs") rather than the generic "data".
+  pii_protection:
+    severity_min: low
+  continuity:
+    severity_min: medium
+    must_mention: ["terminat"]
+  liability_dispute:
+    severity_min: medium
+flags:
+  content_licensing: { presence: any }
+  account_access: { presence: any }
+  payment_subscription: { presence: any }
+  jurisdictional: { presence: any }
