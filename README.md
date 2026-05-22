@@ -34,9 +34,9 @@ tandc --help
 ## Usage — CLI (v1)
 
 ```bash
-tandc analyze https://www.anthropic.com/legal/consumer-terms
+tandc analyze https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
 cat policy.txt | tandc analyze -
-tandc analyze https://www.anthropic.com/legal/commercial-terms --opus
+tandc analyze https://slack.com/terms-of-service/user --opus
 tandc cache list
 ```
 
